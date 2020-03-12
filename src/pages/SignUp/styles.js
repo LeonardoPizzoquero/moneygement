@@ -40,5 +40,7 @@ export const SignLinkText = styled.Text`
 
 export const TitleLogo = styled.Text`
   color: #fff;
+  font-size: 14px;
+  margin-top: 10px;
   font-weight: bold;
 `;

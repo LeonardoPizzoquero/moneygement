@@ -11,23 +11,19 @@ import {
   SignLink,
   SignLinkText,
   TitleLogo,
+  RecoveryMessage,
 } from './styles';
 
 import logo from '~/assets/logo.png';
 
-export default function SignUp({ navigation }) {
+export default function RecoveryPassword({ navigation }) {
   return (
     <Background>
       <Container>
         <Image source={logo} />
         <TitleLogo>Moneygement</TitleLogo>
+        <RecoveryMessage>Insira seu e-mail para redefinir sua senha</RecoveryMessage>
         <Form>
-          <FormInput
-            icon="person-outline"
-            autoCorrect={false}
-            placeholder="Digite seu nome completo"
-            returnKeyType="next"
-          />
           <FormInput
             icon="mail-outline"
             keyboardType="email-address"
@@ -36,17 +32,11 @@ export default function SignUp({ navigation }) {
             placeholder="Digite seu e-mail"
             returnKeyType="next"
           />
-          <FormInput
-            icon="lock-outline"
-            secureTextEntry
-            placeholder="Sua senha secreta"
-            returnKeyType="send"
-          />
 
-          <SubmitButton>Acessar</SubmitButton>
+          <SubmitButton>Redefinir senha</SubmitButton>
 
           <SignLink onPress={() => navigation.navigate('SignIn')}>
-            <SignLinkText>Já tenho uma conta</SignLinkText>
+            <SignLinkText>Voltar para o login</SignLinkText>
           </SignLink>
         </Form>
       </Container>
@@ -54,7 +44,7 @@ export default function SignUp({ navigation }) {
   );
 }
 
-SignUp.propTypes = {
+RecoveryPassword.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,

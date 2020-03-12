@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Image } from 'react-native';
 import Background from '~/components/Background';
 
 import {
@@ -11,14 +11,26 @@ import {
   SignLink,
   SignLinkText,
   TitleLogo,
+  LoginButtons,
+  BorderLogin,
+  OtherWrapper,
+  Line,
+  Or,
 } from './styles';
+
+import logo from '~/assets/logo.png';
 
 export default function SignIn({ navigation }) {
   return (
     <Background>
       <Container>
-        <Icon name="piggy-bank" size={50} color="#fff" />
+        <Image source={logo} />
         <TitleLogo>Moneygement</TitleLogo>
+        <OtherWrapper>
+          <Line></Line>
+          <Or>ou</Or>
+          <Line></Line>
+        </OtherWrapper>
         <Form>
           <FormInput
             icon="mail-outline"
@@ -37,9 +49,17 @@ export default function SignIn({ navigation }) {
 
           <SubmitButton>Acessar</SubmitButton>
 
-          <SignLink onPress={() => navigation.navigate('SignUp')}>
-            <SignLinkText>Criar conta gratuita</SignLinkText>
-          </SignLink>
+          <LoginButtons>
+            <SignLink onPress={() => navigation.navigate('SignUp')}>
+              <SignLinkText>Criar conta gratuita</SignLinkText>
+            </SignLink>
+            <SignLink onPress={() => navigation.navigate('SignUp')}>
+              <BorderLogin>|</BorderLogin>
+            </SignLink>
+            <SignLink onPress={() => navigation.navigate('RecoveryPassword')}>
+              <SignLinkText>Esqueci a senha</SignLinkText>
+            </SignLink>
+          </LoginButtons>
         </Form>
       </Container>
     </Background>
