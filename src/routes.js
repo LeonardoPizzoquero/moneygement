@@ -1,5 +1,6 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -16,25 +17,33 @@ export default (isSigned = false) =>
           SignUp,
           RecoveryPassword,
         }),
-        App: createBottomTabNavigator({
-          Dashboard,
-        },
-          {
-            resetOnBlur: true,
-            tabBarOptions: {
-              keyboardHidesTabBar: true,
-              activeTintColor: '#0D53FE',
-              inactiveTintColor: '#AFAFAF',
-              style: {
-                backgroundColor: '#fff',
-                paddingBottom: 5,
+        Dashboard: createDrawerNavigator({
+          Home: createBottomTabNavigator(
+            {
+              Home: {
+                screen: Dashboard,
+              },
+              Transferencias: {
+                screen: SignUp,
               },
             },
-          }
-        ),
+            {
+              resetOnBlur: true,
+              tabBarOptions: {
+                keyboardHidesTabBar: true,
+                activeTintColor: '#0D53FE',
+                inactiveTintColor: '#AFAFAF',
+                style: {
+                  backgroundColor: '#fff',
+                  paddingBottom: 5,
+                },
+              },
+            }
+          ),
+        }),
       },
       {
-        initialRouteName: isSigned ? 'App' : 'Sign',
+        initialRouteName: isSigned ? 'Dashboard' : 'Sign',
       }
     )
   );

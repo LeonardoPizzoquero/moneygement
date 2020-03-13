@@ -1,18 +1,21 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Text, Alert } from 'react-native';
+import { Button } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Container } from './styles';
 
+import { signOut } from '~/store/modules/auth/actions';
+
 function Dashboard({ navigation }) {
+  const dispatch = useDispatch();
+
   return (
     <Container>
-        <Button
-            title="Press me"
-            onPress={() => navigation.openDrawer()}
-        />
+      <Button title="Press me" onPress={() => navigation.openDrawer()} />
+      <Button title="SignOut" onPress={() => dispatch(signOut())} />
     </Container>
   );
 }

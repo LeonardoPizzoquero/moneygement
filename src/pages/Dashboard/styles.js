@@ -12,7 +12,7 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   justify-content: center;
   align-items: center;
   padding: 0 30px;
-  background: #F1F0F7;
+  background: #f1f0f7;
 `;
 
 export const TitleLogo = styled.Text`

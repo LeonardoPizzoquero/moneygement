@@ -22,7 +22,9 @@ export default function RecoveryPassword({ navigation }) {
       <Container>
         <Image source={logo} />
         <TitleLogo>Moneygement</TitleLogo>
-        <RecoveryMessage>Insira seu e-mail para redefinir sua senha</RecoveryMessage>
+        <RecoveryMessage>
+          Insira seu e-mail para redefinir sua senha
+        </RecoveryMessage>
         <Form>
           <FormInput
             icon="mail-outline"
