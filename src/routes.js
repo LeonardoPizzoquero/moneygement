@@ -20,12 +20,24 @@ export default (isSigned = false) =>
         Dashboard: createDrawerNavigator({
           Home: createBottomTabNavigator(
             {
+              Transactions: {
+                screen: SignUp,
+              },
+              Cards: {
+                screen: SignUp,
+              },
               Home: {
                 screen: Dashboard,
               },
-              Transferencias: {
+              Debtors: {
                 screen: SignUp,
               },
+              Charts: {
+                screen: SignUp,
+              },
+            },
+            {
+              initialRouteName: 'Home',
             },
             {
               resetOnBlur: true,

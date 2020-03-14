@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
 import { Image } from 'react-native';
 import Background from '~/components/Background';
@@ -15,6 +16,8 @@ import {
   LoginButtons,
   BorderLogin,
   OtherWrapper,
+  FacebookButton,
+  TextFacebookButton,
   Line,
   Or,
 } from './styles';
@@ -22,6 +25,7 @@ import {
 import logo from '~/assets/logo.png';
 
 import { signInRequest } from '~/store/modules/auth/actions';
+import handleFacebookLogin from '~/services/handleFacebookLogin';
 
 export default function SignIn({ navigation }) {
   const passwordRef = useRef();
@@ -41,6 +45,10 @@ export default function SignIn({ navigation }) {
         <Container>
           <Image source={logo} />
           <TitleLogo>Moneygement</TitleLogo>
+          <FacebookButton loading={loading} onPress={handleFacebookLogin}>
+            <Icon name="facebook-square" size={20} color="#fff" />
+            <TextFacebookButton>Entrar com Facebook</TextFacebookButton>
+          </FacebookButton>
           <OtherWrapper>
             <Line />
             <Or>ou</Or>
@@ -69,7 +77,7 @@ export default function SignIn({ navigation }) {
               onSubmitEditing={handleSubmit}
             />
 
-            <SubmitButton loading={loading} handlePress={handleSubmit}>
+            <SubmitButton loading={loading} onPress={handleSubmit}>
               Acessar
             </SubmitButton>
 

@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
-
+import { RectButton } from 'react-native-gesture-handler';
 import Input from '~/components/Input';
 import Button from '~/components/Button';
 
@@ -19,6 +19,25 @@ export const TitleLogo = styled.Text`
   font-size: 14px;
   margin-top: 10px;
   font-weight: bold;
+`;
+
+export const FacebookButton = styled(RectButton)`
+  height: 46px;
+  background: #4267b2;
+  color: #fff;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 30px 0 15px 0;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const TextFacebookButton = styled.Text`
+  color: #fff;
+  font-weight: bold;
+  margin-left: 10px;
 `;
 
 export const OtherWrapper = styled.View`
