@@ -1,8 +1,14 @@
 import React, { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
-import { Image } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import { Alert, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import axios from 'axios';
+import api from '../../services/api';
+
+import { signInSuccess, signInRequest } from '~/store/modules/auth/actions';
+
 import Background from '~/components/Background';
 import DismissKeyboard from '~/components/DismissKeyboard';
 import {
@@ -24,9 +30,6 @@ import {
 
 import logo from '~/assets/logo.png';
 
-import { signInRequest } from '~/store/modules/auth/actions';
-import handleFacebookLogin from '~/services/handleFacebookLogin';
-
 export default function SignIn({ navigation }) {
   const passwordRef = useRef();
   const dispatch = useDispatch();
@@ -37,6 +40,41 @@ export default function SignIn({ navigation }) {
 
   function handleSubmit() {
     dispatch(signInRequest(email, password));
+  }
+
+  async function initUser(token) {
+    try {
+      const response = await axios.get(
+        `https://graph.facebook.com/v2.8/me?fields=name,email,picture&access_token=${token}`
+      );
+
+      await api.post('/facebook_users', {
+        name: response.data.name,
+        email: response.data.email,
+        user_id: response.data.id,
+      });
+
+      dispatch(signInSuccess(token, response.data));
+    } catch (err) {
+      Alert.alert('Não foi possível realizar o login');
+    }
+  }
+
+  function handleFacebookLogin() {
+    LoginManager.logInWithPermissions(['public_profile', 'email']).then(
+      result => {
+        if (!result.isCancelled) {
+          AccessToken.getCurrentAccessToken().then(data => {
+            initUser(data.accessToken.toString());
+          });
+        }
+      },
+      error => {
+        Alert.alert(
+          `Não foi possível realizar o login, tente novamente: ${error}`
+        );
+      }
+    );
   }
 
   return (
